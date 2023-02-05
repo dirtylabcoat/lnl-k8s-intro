@@ -11,8 +11,14 @@ router.get('/', (ctx: ParameterizedContext) => {
 
 router.get('/:id', (ctx: ParameterizedContext) => {
   const { id } = ctx.params;
-  ctx.status = 200;
-  ctx.body = getPlaylist(Number(id));
+  const playlist = getPlaylist(Number(id));
+  if (playlist) {
+    ctx.status = 200;
+    ctx.body = playlist;
+  } else {
+    ctx.status = 404;
+    ctx.body = { message: 'Playlist not found' };
+  }
 });
 
 export default router;
