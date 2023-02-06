@@ -4,14 +4,14 @@ import { getPlaylist, getPlaylists } from '../../actions/get-playlist';
 
 const router = new KoaRouter();
 
-router.get('/', (ctx: ParameterizedContext) => {
+router.get('/', async (ctx: ParameterizedContext) => {
   ctx.status = 200;
-  ctx.body = getPlaylists();
+  ctx.body = await getPlaylists();
 });
 
-router.get('/:id', (ctx: ParameterizedContext) => {
+router.get('/:id', async (ctx: ParameterizedContext) => {
   const { id } = ctx.params;
-  const playlist = getPlaylist(Number(id));
+  const playlist = await getPlaylist(Number(id));
   if (playlist) {
     ctx.status = 200;
     ctx.body = playlist;

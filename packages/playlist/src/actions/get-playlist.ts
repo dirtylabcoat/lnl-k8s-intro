@@ -1,10 +1,13 @@
-import { playlists } from '../playlists';
 import { Playlist } from '../types';
+import { getAllPlaylists, getPlaylistById } from '../utils/mongodb';
 
-export const getPlaylists = (): Playlist[] => {
-  return playlists;
+export const getPlaylists = async (): Promise<any> => {
+  return await getAllPlaylists();
 };
 
-export const getPlaylist = (id: number): Playlist | undefined => {
-  return playlists.find((p) => p.id === id);
+export const getPlaylist = async (
+  id: number
+): Promise<Playlist | undefined> => {
+  const result = await getPlaylistById(id);
+  return result;
 };
